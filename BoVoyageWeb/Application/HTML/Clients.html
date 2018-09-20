@@ -1,10 +1,202 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
-</head>
-<body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/Application/css/application.css" />
+    <style>
 
+        .Client {
+            border: solid 1px lightgray;
+            padding: 10px;
+        }
+
+            .Client button {
+                float: right;
+                margin-right: 5px;
+                display: none;
+            }
+
+            .Client:hover button {
+                display: block;
+            }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="/"><i class="fas fa-plane"></i> BoVoyage</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Reservations <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" disabled>Client <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/application/html/Destinations.html">Destination</a>
+                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/application/html/Agences.html">Agence</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <div class="container-fluid">
+        <div id="listeClients">
+
+        </div>
+
+        <div class="alert alert-secondary" style="margin-top: 15px">
+            <input type="text" id="Nom" placeholder="Nouveau Client" />
+            <button class="btn btn-primary" onclick="Ajouter()">
+                Ajouter le Client
+            </button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="/Application/js/application.js"></script>
+    <script>
+            function LoadClients() {
+                var divListeClients = $('#listeClients');
+                setLoader(divListeClients);
+
+                $.ajax({
+                    url: '/api/Clients',
+                    success: function (clients) {
+                        divListeClients.empty();
+
+                        for (var client of clients) {
+                            var divClient = $('<div class="Client"></div>');
+                            RemplirDivClient(divClient, client);
+                            divListeClients.append(divClient);
+                        }
+                    }
+                });
+            }
+
+            function RemplirDivClient(divClient, client) {
+                divClient.empty();
+                divClient.data('id', client.ID);
+                divClient.append($('<span></span>').text(client.Nom));
+
+                var boutonSupprimer = $('<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>');
+                boutonSupprimer.on('click', function () {
+                    var idClient = $(this).closest('.Client').data('id');
+                    Supprimer(idClient);
+                });
+                divClient.append(boutonSupprimer);
+
+                var boutonModifier = $('<button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>');
+                boutonModifier.on('click', function () {
+                    Modifier($(this));
+                });
+                divClient.append(boutonModifier);
+            }
+
+            function Modifier(bouton) {
+                var div = bouton.closest('.Client');
+
+                var span = div.find('span');
+                var nom = span.text();
+                div.data('Nom', Nom); // je stocke le nom dans le div en cas d'annulation
+
+                div.empty();
+
+                var input = $('<input type="text"/>').val(span.text());
+                div.append(input);
+                input.focus();
+                input.select();
+                input.on('keyup', function (event) {
+                    var divClient = $(this).closest('.Client');
+                    switch (event.which) {
+                        case 13:/*ENTER*/
+                            EnregistrerModification(divClient);
+                            break;
+                        case 27:/*ESCAPE*/
+                            AnnulerModification(divClient);
+                            break;
+                    }
+                });
+
+                var boutonAnnuler = $('<button class="btn btn-secondary btn-sm">Annuler</button>');
+                boutonAnnuler.on('click', function () {
+                    let divClient = $(this).closest('.Client');
+                    AnnulerModification(divClient);
+                });
+                div.append(boutonAnnuler);
+
+                var boutonEnregistrer = $('<button class="btn btn-primary btn-sm">Enregistrer</button>');
+                boutonEnregistrer.on('click', function () {
+                    EnregistrerModification($(this).closest('.Client'));
+                });
+
+                div.append(boutonEnregistrer);
+            }
+
+            function Ajouter() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/clients',
+                    data: {
+                        Nom: $('#Nom').val()
+                    },
+                    success: function () {
+                        LoadClients();
+                        $('#Nom').val('');
+                    }
+                });
+            }
+
+            function Supprimer(idClient) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/api/clients/' + idClient,
+                    success: function () {
+                        LoadClients();
+                    },
+                    error: function () {
+                        alert('Impossible de supprimer. Peut-être le client est liée à une tache?');
+                    }
+                });
+            }
+
+            function AnnulerModification(divClient) {
+                let idClient = divClient.data('id');
+                let nomClient = divClient.data('Nom'); // nom que j'avais stocké plus haut
+                RemplirDivClient(divClient, { ID: idClient, Nom: nomClient });
+            }
+            function EnregistrerModification(divClient) {
+                let idClient = divClient.data('id');
+                let nomClient = divClient.find('input').val();
+
+                $.ajax({
+                    type: 'PUT',
+                    url: '/api/clients/' + idClient,
+                    data: {
+                        ID: idClient,
+                        Nom: nomClient
+                    },
+                    success: function () {
+                        RemplirDivClient(divClient, { ID: idClient, Nom: nomClient });
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                LoadClients();
+
+                $('#Nom').focus();
+            });
+    </script>
 </body>
+
 </html>
