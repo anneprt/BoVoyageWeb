@@ -15,7 +15,7 @@ namespace BoVoyageWeb.Models
 
         [Required]
         [StringLength(30)]
-        public int NumeroDossier { get; set; }
+        public string NumeroDossier { get; set; }
 
         public int DestinationID { get; set; }
 
