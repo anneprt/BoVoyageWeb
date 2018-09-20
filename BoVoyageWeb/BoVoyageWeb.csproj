@@ -89,6 +89,7 @@
     <Content Include="Application\HTML\Agences.html" />
     <Content Include="Application\HTML\Clients.html" />
     <Content Include="Application\HTML\Destinations.html" />
+    <Content Include="Application\HTML\Reservation.html" />
     <Content Include="Application\HTML\Reservations.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
