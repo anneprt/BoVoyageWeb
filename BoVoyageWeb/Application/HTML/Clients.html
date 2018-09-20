@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -42,7 +43,7 @@
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="/application/html/Destinations.html">Destination</a>
-                 </li>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/application/html/Agences.html">Agence</a>
                 </li>
@@ -56,7 +57,7 @@
         </div>
 
         <div class="alert alert-secondary" style="margin-top: 15px">
-            <input type="text" id="Nom" placeholder="Nouveau Client" />
+            <input type="text" id="NomClient" placeholder="Nouveau Client" />
             <button class="btn btn-primary" onclick="Ajouter()">
                 Ajouter le Client
             </button>
@@ -65,138 +66,140 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="/Application/js/application.js"></script>
     <script>
-            function LoadClients() {
-                var divListeClients = $('#listeClients');
-                setLoader(divListeClients);
+        function LoadClients() {
+            var divListeClients = $('#listeClients');
+            setLoader(divListeClients); NomClient
 
-                $.ajax({
-                    url: '/api/Clients',
-                    success: function (clients) {
-                        divListeClients.empty();
+            $.ajax({
+                url: '/api/Clients',
+                success: function (clients) {
+                    divListeClients.empty();
 
-                        for (var client of clients) {
-                            var divClient = $('<div class="Client"></div>');
-                            RemplirDivClient(divClient, client);
-                            divListeClients.append(divClient);
-                        }
+                    for (var client of clients) {
+                        var divClient = $('<div class="Client"></div>');
+                        RemplirDivClient(divClient, client);
+                        divListeClients.append(divClient);
                     }
-                });
-            }
-
-            function RemplirDivClient(divClient, client) {
-                divClient.empty();
-                divClient.data('id', client.ID);
-                divClient.append($('<span></span>').text(client.Nom));
-
-                var boutonSupprimer = $('<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>');
-                boutonSupprimer.on('click', function () {
-                    var idClient = $(this).closest('.Client').data('id');
-                    Supprimer(idClient);
-                });
-                divClient.append(boutonSupprimer);
-
-                var boutonModifier = $('<button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>');
-                boutonModifier.on('click', function () {
-                    Modifier($(this));
-                });
-                divClient.append(boutonModifier);
-            }
-
-            function Modifier(bouton) {
-                var div = bouton.closest('.Client');
-
-                var span = div.find('span');
-                var nom = span.text();
-                div.data('Nom', Nom); // je stocke le nom dans le div en cas d'annulation
-
-                div.empty();
-
-                var input = $('<input type="text"/>').val(span.text());
-                div.append(input);
-                input.focus();
-                input.select();
-                input.on('keyup', function (event) {
-                    var divClient = $(this).closest('.Client');
-                    switch (event.which) {
-                        case 13:/*ENTER*/
-                            EnregistrerModification(divClient);
-                            break;
-                        case 27:/*ESCAPE*/
-                            AnnulerModification(divClient);
-                            break;
-                    }
-                });
-
-                var boutonAnnuler = $('<button class="btn btn-secondary btn-sm">Annuler</button>');
-                boutonAnnuler.on('click', function () {
-                    let divClient = $(this).closest('.Client');
-                    AnnulerModification(divClient);
-                });
-                div.append(boutonAnnuler);
-
-                var boutonEnregistrer = $('<button class="btn btn-primary btn-sm">Enregistrer</button>');
-                boutonEnregistrer.on('click', function () {
-                    EnregistrerModification($(this).closest('.Client'));
-                });
-
-                div.append(boutonEnregistrer);
-            }
-
-            function Ajouter() {
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/clients',
-                    data: {
-                        Nom: $('#Nom').val()
-                    },
-                    success: function () {
-                        LoadClients();
-                        $('#Nom').val('');
-                    }
-                });
-            }
-
-            function Supprimer(idClient) {
-                $.ajax({
-                    type: 'DELETE',
-                    url: '/api/clients/' + idClient,
-                    success: function () {
-                        LoadClients();
-                    },
-                    error: function () {
-                        alert('Impossible de supprimer. Peut-être le client est liée à une tache?');
-                    }
-                });
-            }
-
-            function AnnulerModification(divClient) {
-                let idClient = divClient.data('id');
-                let nomClient = divClient.data('Nom'); // nom que j'avais stocké plus haut
-                RemplirDivClient(divClient, { ID: idClient, Nom: nomClient });
-            }
-            function EnregistrerModification(divClient) {
-                let idClient = divClient.data('id');
-                let nomClient = divClient.find('input').val();
-
-                $.ajax({
-                    type: 'PUT',
-                    url: '/api/clients/' + idClient,
-                    data: {
-                        ID: idClient,
-                        Nom: nomClient
-                    },
-                    success: function () {
-                        RemplirDivClient(divClient, { ID: idClient, Nom: nomClient });
-                    }
-                });
-            }
-
-            $(document).ready(function () {
-                LoadClients();
-
-                $('#Nom').focus();
+                }
             });
+        }
+
+        function RemplirDivClient(divClient, client) {
+            divClient.empty();
+            divClient.data('id', client.ID);
+            divClient.append($('<span></span>').text(client.NomClient));
+
+            var boutonSupprimer = $('<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>');
+            boutonSupprimer.on('click', function () {
+                var idClient = $(this).closest('.Client').data('id');
+                Supprimer(idClient);
+            });
+            divClient.append(boutonSupprimer);
+
+            var boutonModifier = $('<button class="btn btn-primary btn-sm"><i class="fas fa-pen"></i></button>');
+            boutonModifier.on('click', function () {
+                Modifier($(this));
+            });
+            divClient.append(boutonModifier);
+        }
+
+        function Modifier(bouton) {
+            var div = bouton.closest('.Client');
+
+            var span = div.find('span');
+            var NomClient = span.text();
+            div.data('NomClient', nomClient); // je stocke le nom dans le div en cas d'annulation
+
+            div.empty();
+
+            var input = $('<input type="text"/>').val(span.text());
+            div.append(input);
+            input.focus();
+            input.select();
+            input.on('keyup', function (event) {
+                var divClient = $(this).closest('.Client');
+                switch (event.which) {
+                    case 13:/*ENTER*/
+                        EnregistrerModification(divClient);
+                        break;
+                    case 27:/*ESCAPE*/
+                        AnnulerModification(divClient);
+                        break;
+                }
+            });
+
+            var boutonAnnuler = $('<button class="btn btn-secondary btn-sm">Annuler</button>');
+            boutonAnnuler.on('click', function () {
+                let divClient = $(this).closest('.Client');
+                AnnulerModification(divClient);
+            });
+            div.append(boutonAnnuler);
+
+            var boutonEnregistrer = $('<button class="btn btn-primary btn-sm">Enregistrer</button>');
+            boutonEnregistrer.on('click', function () {
+                EnregistrerModification($(this).closest('.Client'));
+            });
+
+            div.append(boutonEnregistrer);
+        }
+
+        function Ajouter() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/clients',
+                data: {
+                    nomClient: $('#NomClient').val()
+                },
+                success: function () {
+                    LoadClients();
+                    $('#NomClient').val('');
+                }
+            });
+        }
+
+        function Supprimer(idClient) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/clients/' + idClient,
+                success: function () {
+                    LoadClients();
+                },
+                error: function () {
+                    alert('Impossible de supprimer. Peut-être le client est liée à une tache?');
+                }
+            });
+        }
+
+        function AnnulerModification(divClient) {
+            let idClient = divClient.data('id');
+            let nomClient = divClient.data('nomClient'); // nom que j'avais stocké plus haut
+
+            RemplirDivClient(divClient, { ID: idClient, nomClient: nomClient });
+        }
+        function EnregistrerModification(divClient) {
+            let idClient = divClient.data('id');
+            let nomClient = divClient.find('input').val();
+
+            $.ajax({
+                type: 'PUT',
+                url: '/api/clients/' + idClient,
+                data: {
+                    ID: idClient,
+                    NomClient: nomClient
+                },
+                success: function () {
+                    RemplirDivClient(divClient, { ID: idClient, Nom: nomClient });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            LoadClients();
+
+            $('#Nom').focus();
+        });
     </script>
 </body>
 
 </html>
+
