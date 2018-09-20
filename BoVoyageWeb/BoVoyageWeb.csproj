@@ -93,6 +93,8 @@
     <Content Include="Application\HTML\Reservation.html" />
     <Content Include="Application\HTML\Reservations.html" />
     <Content Include="Application\CSS\application.css" />
+    <Content Include="Application\JavaScript\application.js" />
+    <Content Include="Application\JavaScript\bootstrap-alert.min.js" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="Web.config" />
@@ -128,7 +130,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Application\JavaScript\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
