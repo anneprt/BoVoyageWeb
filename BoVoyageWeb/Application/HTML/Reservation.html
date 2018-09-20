@@ -14,14 +14,14 @@
 
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="/"><i class="fas fa-check-double"></i> TodoApp</a>
+        <a class="navbar-brand" href="/"><i class="fas fa-plane"></i> BoVoyage</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Reservations <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/application/html/clients.html">Catégories</a>
+                    <a class="nav-link" href="/application/html/clients.html">Client</a>
                 </li>
             </ul>
         </div>
@@ -31,46 +31,85 @@
 
         <form novalidate>
             <div class="form-group">
-                <label for="Nom">Nom*</label>
-                <input type="text" class="form-control" id="Nom" required />
+                <label for="NumeroDossier">Numero de Dossier*</label>
+                <input type="text" class="form-control" id="NumeroDossier" required />
                 <div class="invalid-feedback">
                     Champ requis
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="Description">Description</label>
-                <textarea class="form-control" id="Description" rows="3"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="DateFin">Date de fin</label>
-                <input type="date" class="form-control" id="DateFin" />
-            </div>
-
-            <div class="form-group">
-                <label style="display: block;">Priorité</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Priorite" id="Priorite_Haute" value="1">
-                    <label class="form-check-label" for="Priorite_Haute">Haute</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Priorite" id="Priorite_Moyenne" value="2">
-                    <label class="form-check-label" for="Priorite_Moyenne">Moyenne</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Priorite" id="Priorite_Basse" value="3">
-                    <label class="form-check-label" for="Priorite_Basse">Basse</label>
+                <label for="Destination">Destination*</label>
+                <select class="form-control" id="Destination" required></select>
+                <div class="invalid-feedback">
+                    Champ requis
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="client">Catégorie*</label>
+                <label for="DateDepart">Date de départ</label>
+                <input type="date" class="form-control" id="DateDepart" />
+            </div>
+
+            <div class="form-group">
+                <label for="DateRetour">Date de Retour</label>
+                <input type="date" class="form-control" id="DateRetour" />
+            </div>
+
+            <div class="form-group">
+                <label for="Prix">Prix du voyage*</label>
+                <input type="text" class="form-control" id="Prix" required />
+                <div class="invalid-feedback">
+                    Champ requis
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="NombreParticipants">Nombre de Participants*</label>
+                <input type="text" class="form-control" id="NombreParticipants" required />
+                <div class="invalid-feedback">
+                    Champ requis
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="client">Nom du Client*</label>
                 <select class="form-control" id="client" required></select>
                 <div class="invalid-feedback">
                     Champ requis
                 </div>
             </div>
+
+            <div class="form-group">
+                <label style="display: block;">Assurance</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Assurance" id="Protection" value="1">
+                    <label class="form-check-label" for="Protection">Remboursable</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Assurance" id="Non_protege" value="2">
+                    <label class="form-check-label" for="Non_protege">Non-Remboursable</label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label style="display: block;">Statut</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Statut" id="Priorite_Haute" value="1">
+                    <label class="form-check-label" for="Priorite_Haute">Accepté</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Statut" id="Priorite_Moyenne" value="2">
+                    <label class="form-check-label" for="Priorite_Moyenne">En cours</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="Statut" id="Priorite_Basse" value="3">
+                    <label class="form-check-label" for="Priorite_Basse">Refusé</label>
+                </div>
+            </div>
+
+
 
         </form>
         <div class="actions">
