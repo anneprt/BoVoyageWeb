@@ -24,10 +24,10 @@ namespace BoVoyageWeb.Migrations
                         Civilite = c.String(nullable: false, maxLength: 4),
                         Nom = c.String(nullable: false, maxLength: 30),
                         Prenom = c.String(nullable: false, maxLength: 30),
-                        Adresse = c.String(maxLength: 50),
-                        Telephone = c.String(maxLength: 10),
+                        Adresse = c.String(),
+                        Telephone = c.String(),
                         DateNaissance = c.DateTime(nullable: false),
-                        Age = c.Int(nullable: false),
+                        Age = c.Int(),
                         Email = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
@@ -56,7 +56,6 @@ namespace BoVoyageWeb.Migrations
                         DateDepart = c.DateTime(nullable: false),
                         DateRetour = c.DateTime(nullable: false),
                         Prix = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        DateFin = c.DateTime(),
                         Statut = c.Boolean(nullable: false),
                         NombreParticipants = c.Int(),
                         ClientID = c.Int(nullable: false),

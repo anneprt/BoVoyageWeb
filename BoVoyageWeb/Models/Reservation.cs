@@ -31,8 +31,6 @@ namespace BoVoyageWeb.Models
         [Required]
         public decimal Prix { get; set; }
 
-        public DateTime? DateFin { get; set; }
-
         public bool Statut { get; set; }
 
         public int? NombreParticipants { get; set; }

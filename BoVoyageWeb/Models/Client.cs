@@ -25,15 +25,13 @@ namespace BoVoyageWeb.Models
         [StringLength(30)]
         public string Prenom { get; set; }
 
-        [StringLength(50)]
         public string Adresse { get; set; }
 
-        [StringLength(10)]
         public string Telephone { get; set; }
 
         public DateTime DateNaissance { get; set; }
 
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         public string Email { get; set; }
 
