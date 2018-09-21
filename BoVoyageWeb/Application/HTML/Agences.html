@@ -70,7 +70,7 @@
         function LoadAgences() {
             var divListeAgences = $('#listeAgences');
             setLoader(divListeAgences);
-
+            
             $.ajax({
                 url: '/api/agences',
                 success: function (agences) {
@@ -109,7 +109,7 @@
 
             var span = div.find('span');
             var NomAgence = span.text();
-            div.data('NomAgence', NomAgence); // je stocke le NomAgence dans le div en cas d'annulation
+            div.data('NomAgence', NomAgence); 
 
             div.empty();
 
@@ -193,10 +193,7 @@
         }
 
         $(document).ready(function () {
-            LoadAgences();
-
-            $('#NomAgence').focus();
-        });
+           });
     </script>
 </body>
 

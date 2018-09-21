@@ -50,7 +50,7 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <!-- <div id="listeAgences">-->
+        <div id="listeDestinations"></div>
 
     </div>
 
@@ -59,7 +59,7 @@
                 Ajouter une destination
             </a>
 
-            <button class="btn btn-primary" onclick="LoadAgences()">
+            <button class="btn btn-primary" onclick="LoadDestinations()">
                 Lister des destinations
             </button>
         </div>
@@ -109,7 +109,7 @@
 
                 var span = div.find('span');
                 var nom = span.text();
-                div.data('pays', Pays); // je stocke le nom dans le div en cas d'annulation
+                div.data('Pays', Pays);
 
                 div.empty();
 
@@ -174,29 +174,27 @@
             function AnnulerModification(divDestination) {
                 let idDestination = divDestination.data('id');
                 let nomDestination = divDestination.data('Pays'); // nom que j'avais stocké plus haut
-                RemplirDivDestination(divDestination, { ID: idDestination, Pays: paysDestination });
+                RemplirDivDestination(divDestination, { ID: idDestination, Pays: PaysDestination });
             }
             function EnregistrerModification(divDestination) {
                 let idDestination = divDestination.data('id');
-                let paysDestination = divDestination.find('input').val();
+                let PaysDestination = divDestination.find('input').val();
 
                 $.ajax({
                     type: 'PUT',
                     url: '/api/destinations/' + idDestination,
                     data: {
                         ID: idDestination,
-                        Pays: paysDestination
+                        Pays: PaysDestination
                     },
                     success: function () {
-                        RemplirDivDestination(divDestination, { ID: idDestination, Pays: paysDestination });
+                        RemplirDivDestination(divDestination, { ID: idDestination, Pays: PaysDestination });
                     }
                 });
             }
 
             $(document).ready(function () {
-                LoadDestinations();
 
-                $('#Pays').focus();
             });
         </script>
 </body>

@@ -151,11 +151,11 @@
                 type: 'POST',
                 url: '/api/clients',
                 data: {
-                    client: $('#nom').val()
+                    client: $('#Nom').val()
                 },
                 success: function () {
                     LoadClients();
-                    $('#nom').val('');
+                    $('#Nom').val('');
                 }
             });
         }
@@ -175,23 +175,23 @@
 
         function AnnulerModification(divClient) {
             let idClient = divClient.data('id');
-            let Nom = divClient.data('nom');
+            let Nom = divClient.data('Nom');
 
-            RemplirDivClient(divClient, { ID: idClient, Nom : nom });
+            RemplirDivClient(divClient, { ID: idClient, Nom : Nom });
         }
         function EnregistrerModification(divClient) {
             let idClient = divClient.data('id');
-            let nom = divClient.find('input').val();
+            let Nom = divClient.find('input').val();
 
             $.ajax({
                 type: 'PUT',
                 url: '/api/clients/' + idClient,
                 data: {
                     ID: idClient,
-                    Nom: nom
+                    Nom: Nom
                 },
                 success: function () {
-                    RemplirDivClient(divClient, { ID: idClient, Nom: nom });
+                    RemplirDivClient(divClient, { ID: idClient, Nom: Nom });
                    
                 }
             });

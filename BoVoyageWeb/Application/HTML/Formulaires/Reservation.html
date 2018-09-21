@@ -9,7 +9,7 @@
           crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="../../Application/css/application.css" />
+    <link rel="stylesheet" href="/Application/css/application.css" />
 </head>
 
 <body>
@@ -32,8 +32,13 @@
             </ul>
         </div>
     </nav>
+
     <div class="container-fluid">
-        <h3>Nouvelle reservation</h3>
+        <div id="listeReservations"></div>
+    </div>
+
+    <div class="container-fluid">
+        <h3>Nouvelle Reservation</h3>
 
         <form novalidate>
             <div class="form-group">
@@ -85,7 +90,7 @@
 
             <div class="form-group">
                 <label for="client">Nom du Client*</label>
-                <select class="form-control" id="client" required></select>
+                <select class="form-control" id="Client" required></select>
                 <div class="invalid-feedback">
                     *Champ requis
                 </div>
@@ -154,7 +159,7 @@
                 NombreParticipants: $('#NombreParticipants').val(),
                 ClientID: $('#Client').val(),
                 Assurance: $('#Assurance').val(),
-               };
+            };
 
             $.ajax({
                 type: 'POST',
@@ -173,7 +178,25 @@
             return false;
         }
 
-       // function LoadClients() {
+        function LoadDestinations() {
+            $.ajax({
+                url: '/api/destinations',
+                success: function (destinations) {
+                    var select = $("#Destination");
+                    select.empty();
+                    select.append($('<option></option>')); // élément vide
+
+                    for (destination of destinations) {
+                        var option = $('<option></option>');
+                        option.val(destination.ID);
+                        option.text(destination.Pays);
+                        select.append(option);
+                    }
+                }
+            });
+        }
+
+        function LoadClients() {
             $.ajax({
                 url: '/api/clients',
                 success: function (clients) {
@@ -192,7 +215,8 @@
         }
 
         $(document).ready(function () {
-            Loadclients();
+            LoadDestinations();
+            LoadClients();
             $('#Nom').focus(); // Sans jquery: document.getElementById('Nom').focus();
         });
 
