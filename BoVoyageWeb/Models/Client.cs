@@ -33,6 +33,7 @@ namespace BoVoyageWeb.Models
 
         public int? Age { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
     }

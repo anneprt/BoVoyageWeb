@@ -51,8 +51,7 @@
 
     </nav>
     <div class="container-fluid">
-        <!-- <div id="listeAgences">-->
-
+        <div id="listeAgences"></div>
     </div>
 
     <div class="alert alert-secondary" style="margin-top: 15px">
@@ -66,7 +65,7 @@
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="/Application/js/application.js"></script>
+    <script src="/Application/JavaScript/application.js"></script>
     <script>
         function LoadAgences() {
             var divListeAgences = $('#listeAgences');
@@ -89,7 +88,7 @@
         function RemplirDivAgence(divAgence, agence) {
             divAgence.empty();
             divAgence.data('id', agence.ID);
-            divAgence.append($('<span></span>').text(agence.Nom));
+            divAgence.append($('<span></span>').text(agence.NomAgence));
 
             var boutonSupprimer = $('<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>');
             boutonSupprimer.on('click', function () {
@@ -109,8 +108,8 @@
             var div = bouton.closest('.Agence');
 
             var span = div.find('span');
-            var nom = span.text();
-            div.data('Nom', Nom); // je stocke le nom dans le div en cas d'annulation
+            var NomAgence = span.text();
+            div.data('NomAgence', NomAgence); // je stocke le NomAgence dans le div en cas d'annulation
 
             div.empty();
 
@@ -150,11 +149,11 @@
                 type: 'POST',
                 url: '/api/agences',
                 data: {
-                    Nom: $('#Nom').val()
+                    NomAgence: $('#NomAgence').val()
                 },
                 success: function () {
                     LoadAgences();
-                    $('#Nom').val('');
+                    $('#NomAgence').val('');
                 }
             });
         }
@@ -173,22 +172,22 @@
 
         function AnnulerModification(divAgence) {
             let idAgence = divAgence.data('id');
-            let nomAgence = divAgence.data('Nom'); // nom que j'avais stocké plus haut
-            RemplirDivAgence(divAgence, { ID: idAgence, Nom: nomAgence });
+            let nomAgence = divAgence.data('NomAgence'); // NomAgence que j'avais stocké plus haut
+            RemplirDivAgence(divAgence, { ID: idAgence, NomAgence: NomAgence });
         }
         function EnregistrerModification(divAgence) {
             let idAgence = divAgence.data('id');
-            let nomAgence = divAgence.find('input').val();
+            let NomAgence = divAgence.find('input').val();
 
             $.ajax({
                 type: 'PUT',
                 url: '/api/agences/' + idAgence,
                 data: {
                     ID: idAgence,
-                    Nom: nomAgence
+                    NomAgence: NomAgence
                 },
                 success: function () {
-                    RemplirDivAgence(divAgence, { ID: idAgence, Nom: nomAgence });
+                    RemplirDivAgence(divAgence, { ID: idAgence, NomAgence: NomAgence });
                 }
             });
         }
@@ -196,7 +195,7 @@
         $(document).ready(function () {
             LoadAgences();
 
-            $('#Nom').focus();
+            $('#NomAgence').focus();
         });
     </script>
 </body>

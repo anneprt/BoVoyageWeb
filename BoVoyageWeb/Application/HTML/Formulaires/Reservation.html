@@ -9,7 +9,7 @@
           crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="/Application/css/application.css" />
+    <link rel="stylesheet" href="../../Application/css/application.css" />
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                 <label for="NumeroDossier">Numero de Dossier*</label>
                 <input type="text" class="form-control" id="NumeroDossier" required />
                 <div class="invalid-feedback">
-                    Champ requis
+                    *Champ requis
                 </div>
             </div>
 
@@ -48,20 +48,25 @@
                 <label for="Destination">Destination*</label>
                 <select class="form-control" id="Destination" required></select>
                 <div class="invalid-feedback">
-                    Champ requis
+                    *Champ requis
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="DateDepart">Date de départ</label>
-                <input type="date" class="form-control" id="DateDepart" />
+                <label for="DateDepart">Date de départ*</label>
+                <input type="date" class="form-control" id="DateDepart" required>
+                <div class="invalid-feedback">
+                    *Champ requis
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="DateRetour">Date de Retour</label>
-                <input type="date" class="form-control" id="DateRetour" />
+                <label for="DateRetour">Date de Retour*</label>
+                <input type="date" class="form-control" id="DateRetour" required>
+                <div class="invalid-feedback">
+                    *Champ requis
+                </div>
             </div>
-
             <div class="form-group">
                 <label for="Prix">Prix du voyage*</label>
                 <input type="text" class="form-control" id="Prix" required />
@@ -74,7 +79,7 @@
                 <label for="NombreParticipants">Nombre de Participants*</label>
                 <input type="text" class="form-control" id="NombreParticipants" required />
                 <div class="invalid-feedback">
-                    Champ requis
+                    *Champ requis
                 </div>
             </div>
 
@@ -82,7 +87,7 @@
                 <label for="client">Nom du Client*</label>
                 <select class="form-control" id="client" required></select>
                 <div class="invalid-feedback">
-                    Champ requis
+                    *Champ requis
                 </div>
             </div>
 

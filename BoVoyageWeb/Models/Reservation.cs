@@ -19,6 +19,7 @@ namespace BoVoyageWeb.Models
 
         public int DestinationID { get; set; }
 
+        [Required]
         [ForeignKey("DestinationID")]
         public Destination Destination { get; set; }
 

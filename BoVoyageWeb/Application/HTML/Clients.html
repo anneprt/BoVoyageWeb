@@ -52,7 +52,7 @@
 
     </nav>
     <div class="container-fluid">
-        <!-- <div id="listeAgences">-->
+        <div id="listeClients"></div>
 
     </div>
 
@@ -67,11 +67,11 @@
         </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="/Application/js/application.js"></script>
+    <script src="/Application/JavaScript/application.js"></script>
     <script>
         function LoadClients() {
             var divListeClients = $('#listeClients');
-            setLoader(divListeClients); NomClient
+            setLoader(divListeClients);
 
             $.ajax({
                 url: '/api/Clients',
@@ -90,7 +90,7 @@
         function RemplirDivClient(divClient, client) {
             divClient.empty();
             divClient.data('id', client.ID);
-            divClient.append($('<span></span>').text(client.NomClient));
+            divClient.append($('<span></span>').text(client.Nom));
 
             var boutonSupprimer = $('<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>');
             boutonSupprimer.on('click', function () {
@@ -110,8 +110,8 @@
             var div = bouton.closest('.Client');
 
             var span = div.find('span');
-            var NomClient = span.text();
-            div.data('NomClient', nomClient); // je stocke le nom dans le div en cas d'annulation
+            var Nom = span.text();
+            div.data('Nom', Nom);
 
             div.empty();
 
@@ -151,11 +151,11 @@
                 type: 'POST',
                 url: '/api/clients',
                 data: {
-                    nomClient: $('#NomClient').val()
+                    client: $('#nom').val()
                 },
                 success: function () {
                     LoadClients();
-                    $('#NomClient').val('');
+                    $('#nom').val('');
                 }
             });
         }
@@ -175,31 +175,29 @@
 
         function AnnulerModification(divClient) {
             let idClient = divClient.data('id');
-            let nomClient = divClient.data('nomClient'); // nom que j'avais stocké plus haut
+            let Nom = divClient.data('nom');
 
-            RemplirDivClient(divClient, { ID: idClient, nomClient: nomClient });
+            RemplirDivClient(divClient, { ID: idClient, Nom : nom });
         }
         function EnregistrerModification(divClient) {
             let idClient = divClient.data('id');
-            let nomClient = divClient.find('input').val();
+            let nom = divClient.find('input').val();
 
             $.ajax({
                 type: 'PUT',
                 url: '/api/clients/' + idClient,
                 data: {
                     ID: idClient,
-                    NomClient: nomClient
+                    Nom: nom
                 },
                 success: function () {
-                    RemplirDivClient(divClient, { ID: idClient, Nom: nomClient });
+                    RemplirDivClient(divClient, { ID: idClient, Nom: nom });
+                   
                 }
             });
         }
 
         $(document).ready(function () {
-            LoadClients();
-
-            $('#Nom').focus();
         });
     </script>
 </body>
