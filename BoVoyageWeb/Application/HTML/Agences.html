@@ -38,30 +38,32 @@
                     <a class="nav-link" href="/">Reservations <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/application/html/Clients.html">Client</a>
+                    <a class="nav-link" href="/application/html/Clients.html">Clients</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/application/html/Destinations.html">Destination</a>
+                    <a class="nav-link" href="/application/html/Destinations.html">Destinations</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#" disabled>Agence<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#" disabled>Agences<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
 
     </nav>
     <div class="container-fluid">
-        <div id="listeAgences">
+        <!-- <div id="listeAgences">-->
 
-        </div>
+    </div>
 
-        <div class="alert alert-secondary" style="margin-top: 15px">
-            <input type="text" id="Nom" placeholder="Nouvelle Agence" />
-            <button class="btn btn-primary" onclick="Ajouter()">
-                Ajouter l'Agence
+        <div class="alert alert-info" style="margin-top: 15px">
+            <button class="btn btn-primary" onclick=<!--"Ajouter()">-->
+                Ajouter une agence
+            </button>
+            <button class="btn btn-primary" onclick="LoadAgences()">
+                Lister les agences
             </button>
         </div>
-    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="/Application/js/application.js"></script>
     <script>

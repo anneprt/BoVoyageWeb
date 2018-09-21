@@ -99,7 +99,10 @@
     <Content Include="Application\HTML\Agences.html" />
     <Content Include="Application\HTML\Clients.html" />
     <Content Include="Application\HTML\Destinations.html" />
-    <Content Include="Application\HTML\Reservation.html" />
+    <Content Include="Application\HTML\Formulaires\Agence.html" />
+    <Content Include="Application\HTML\Formulaires\Client.html" />
+    <Content Include="Application\HTML\Formulaires\Destination.html" />
+    <Content Include="Application\HTML\Formulaires\Reservation.html" />
     <Content Include="Application\HTML\Reservations.html" />
     <Content Include="Application\CSS\application.css" />
     <Content Include="Application\JavaScript\application.js" />
