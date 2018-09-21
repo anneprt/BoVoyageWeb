@@ -55,14 +55,15 @@
 
     </div>
 
-        <div class="alert alert-info" style="margin-top: 15px">
-            <button class="btn btn-primary" onclick=<!--"Ajouter()">-->
+    <div class="alert alert-secondary" style="margin-top: 15px">
+        <a href="/Application/HTML/Formulaires/Agence.html" class="btn btn-primary">
                 Ajouter une agence
-            </button>
-            <button class="btn btn-primary" onclick="LoadAgences()">
-                Lister les agences
-            </button>
-        </div>
+            </a>
+       
+        <button class="btn btn-primary" onclick="LoadAgences()">
+            Lister les agences
+        </button>
+    </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="/Application/js/application.js"></script>
@@ -166,7 +167,7 @@
                     LoadAgences();
                 },
                 error: function () {
-                    alert('Impossible de supprimer. Peut-être l'agence est liée à une tache ? ')}
+                    alert("Impossible de supprimer. Peut-être l'agence est liée à une tache ? ")}
             });
         }
 

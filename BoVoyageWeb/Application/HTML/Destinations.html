@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous" />
+          crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-        crossorigin="anonymous">
+          crossorigin="anonymous">
     <link rel="stylesheet" href="/Application/css/application.css" />
     <style>
 
@@ -26,7 +26,7 @@
             .Destination:hover button {
                 display: block;
             }
- </style>
+    </style>
 </head>
 
 <body>
@@ -49,18 +49,21 @@
             </ul>
         </div>
     </nav>
-        <div class="container-fluid">
-            <div id="listeDestinations">
+    <div class="container-fluid">
+        <!-- <div id="listeAgences">-->
 
-            </div>
+    </div>
 
-            <div class="alert alert-secondary" style="margin-top: 15px">
-                <input type="text" id="Nom" placeholder="Nouvelle destination" />
-                <button class="btn btn-primary" onclick="Ajouter()">
-                    Ajouter la destination
-                </button>
-            </div>
+        <div class="alert alert-secondary" style="margin-top: 15px">
+            <a href="/Application/HTML/Formulaires/Destination.html" class="btn btn-primary">
+                Ajouter une destination
+            </a>
+
+            <button class="btn btn-primary" onclick="LoadAgences()">
+                Lister des destinations
+            </button>
         </div>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
         <script src="/Application/js/application.js"></script>
         <script>
