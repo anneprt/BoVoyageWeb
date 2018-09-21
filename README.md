@@ -1,4 +1,4 @@
-Dépot du projet web de Laynet et Anne
+Dépot du projet web de Laynet 
 
 Yannick, 
 
